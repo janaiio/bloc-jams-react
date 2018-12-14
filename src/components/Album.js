@@ -66,7 +66,10 @@ class Album extends Component {
             {
               this.state.album.songs.map( (song, index) =>
                 <tr className="song" key={index} onClick={ () => this.handleSongClick(song) }>
-                  <td>{index+1}</td>
+                  <td>{index+1}
+                    <span className="ion-play" onMouseEnter={ <ion-icon name="play"></ion-icon> } onMouseLeave={index+1}></span>
+                    <span className="ion-pause" onMouseEnter={ <ion-icon name="pause"></ion-icon> } onMouseLeave={index+1}></span>
+                  </td>
                   <td>{song.title}</td>
                   <td>{song.duration}</td>
                 </tr>
