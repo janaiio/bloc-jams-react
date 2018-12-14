@@ -44,6 +44,19 @@ class Album extends Component {
     }
   }
 
+  playButton(song) {
+
+  }
+
+  pauseButton(song) {
+
+  }
+
+  handleOnMouse(song) {
+
+
+  }
+
   render() {
     return (
       <section className="album">
