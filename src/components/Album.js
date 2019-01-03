@@ -54,7 +54,18 @@ class Album extends Component {
   }
 
   renderIcon(song, index){
-
+    const isSameSong = this.state.currentSong === song;
+    const isHoveredSong = this.state.hoveredSong === song;
+    if (this.state.isPlaying && isSameSong && isHoveredSong){
+      return <span className = "ion-pause"><ion-icon name = "pause"></ion-icon></span>;
+    }
+    else if (!this.state.isPlaying && isHoveredSong){
+      return <span className = "ion-play"><ion-icon name = "play"></ion-icon></span>;
+    }
+    else if (!isSameSong && isHoveredSong){
+      return <span className = "ion-play"><ion-icon name = "play"></ion-icon></span>;
+    }
+    return <p>{index + 1}</p>
   }
 
   render() {
@@ -79,9 +90,7 @@ class Album extends Component {
             {
               this.state.album.songs.map( (song, index) =>
                 <tr className="song" key={index} onClick={ () => this.handleSongClick(song) } onMouseEnter={() => this.handleSongHover(song) } onMouseLeave={() => this.handleSongLeave(song)}>
-                  <td>{this.renderIcon()}</td>
-                    <span className="ion-play"><ion-icon name="play"></ion-icon></span>
-                    <span className="ion-pause"><ion-icon name="pause"></ion-icon></span>
+                  <td>{this.renderIcon(song, index)}</td>
                   <td>{song.title}</td>
                   <td>{song.duration}</td>
                 </tr>
