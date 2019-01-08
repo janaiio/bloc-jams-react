@@ -20,7 +20,7 @@ class PlayerBar extends Component {
           <input
             type="range"
             className="seek-bar"
-            value={(this.props.currentTime / this.props.duration) || 0}
+            value={(this.props.formatTime / this.props.duration) || 0}
             max="1"
             min="0"
             step="0.01"
@@ -30,11 +30,11 @@ class PlayerBar extends Component {
           <input
             type="range"
             className="seek-bar"
-            value={(this.props.currentTime / this.props.duration) || 0}
+            value={(this.props.formatTime / this.props.duration) || 0}
             max="1"
             min="0"
             step="0.01"
-            onChange={this.props.formatTime}
+            onChange={this.props.handleTimeChange}
           />
         </section>
         <section id="volume-control">

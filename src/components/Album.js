@@ -95,13 +95,10 @@ class Album extends Component {
     this.setState({ currentTime: newTime });
   }
 
-  formatTime(){
-    const minutes = Math.floor( this.audioElement.currentTime / 60);
-    const seconds = this.audioElement.currentTime - minutes * 60;
-    function str_pad_left(string, pad, length) {
-      return (new Array(length+1).join(pad)+string).slice(-length);
-    };
-    const formattedTime = str_pad_left(minutes, '0', 2)+':'+str_pad_left(seconds, '0', 2);
+  formatTime(currentTime){
+    const minutes = Math.floor(currentTime / 60);
+    const seconds = currentTime - (minutes * 60);
+    const formattedTime = "-" + (minutes < 10 ? "0" + minutes : minutes) + ':' + (seconds < 10 ? "0" + seconds : seconds);
     this.setState({ currentTime: formattedTime })
   }
 
