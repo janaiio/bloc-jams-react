@@ -96,10 +96,13 @@ class Album extends Component {
   }
 
   formatTime(currentTime){
+    if (isNaN(currentTime)){
+    return "-:--";
+    };
     const minutes = Math.floor(currentTime / 60);
-    const seconds = currentTime - (minutes * 60);
-    const formattedTime = "-" + (minutes < 10 ? "0" + minutes : minutes) + ':' + (seconds < 10 ? "0" + seconds : seconds);
-    this.setState({ currentTime: formattedTime })
+    const seconds =  Math.floor((currentTime - minutes) % 60);
+    const formattedTime = (minutes < 10 ? "0" + minutes : minutes) + ':' + (seconds < 10 ? "0" + seconds : seconds);
+    return formattedTime;
   }
 
   handleVolumeChange(e){
@@ -155,7 +158,7 @@ class Album extends Component {
                 <tr className="song" key={index} onClick={ () => this.handleSongClick(song) } onMouseEnter={() => this.handleSongHover(song) } onMouseLeave={() => this.handleSongLeave(song)}>
                   <td>{this.renderIcon(song, index)}</td>
                   <td>{song.title}</td>
-                  <td>{song.duration}</td>
+                  <td>{this.formatTime(song.duration)}</td>
                 </tr>
               )
             }
@@ -171,7 +174,7 @@ class Album extends Component {
           handlePrevClick={() => this.handlePrevClick()}
           handleNextClick={() => this.handleNextClick()}
           handleTimeChange={(e) => this.handleTimeChange(e)}
-          formatTime={() => this.formatTime()}
+          formatTime={(e) => this.formatTime(e)}
           handleVolumeChange={(e) => this.handleVolumeChange(e)}
         />
       </section>
